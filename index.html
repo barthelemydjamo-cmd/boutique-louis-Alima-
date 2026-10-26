@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Découvrez les produits de Louis Alima.">
+  <title>Boutique de Louis Alima</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">LA</span><span><strong>Louis Alima</strong><small>La boutique officielle</small></span></a>
+    <nav><a href="#produits">Produits</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
+    <button id="adminOpen" class="button button-outline">Espace vendeur</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">BIENVENUE DANS NOTRE BOUTIQUE</p>
+        <h1>Les bons produits,<br><span>au bon endroit.</span></h1>
+        <p>Découvrez notre sélection et contactez-nous directement pour obtenir plus d’informations ou passer commande.</p>
+        <a class="button button-primary" href="#produits">Découvrir les produits <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="art-card card-one"></div><div class="art-card card-two"></div>
+        <div class="art-label">Votre boutique<br><strong>en ligne</strong></div>
+      </div>
+    </section>
+
+    <section id="produits" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">NOTRE SÉLECTION</p><h2>Nos produits</h2></div>
+        <input id="searchProducts" class="search" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit">
+      </div>
+      <p id="statusMessage" class="status-message">Chargement des produits…</p>
+      <div id="productGrid" class="product-grid"></div>
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-icon">＋</div><h3>La boutique se prépare</h3>
+        <p>Les produits seront affichés ici dès que le vendeur les aura ajoutés depuis son espace.</p>
+      </div>
+    </section>
+
+    <section id="apropos" class="about">
+      <div class="about-mark">LA</div>
+      <div><p class="eyebrow">À PROPOS</p><h2>Une boutique proche de vous.</h2>
+      <p>Cette vitrine vous permet de découvrir les produits proposés par Louis Alima. Les informations et les prix sont mis à jour par le vendeur.</p></div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div><p class="eyebrow">UNE QUESTION ?</p><h2>Contactez le vendeur</h2><p>Pour connaître la disponibilité d’un produit ou passer commande, contactez directement la boutique.</p></div>
+      <a id="contactButton" class="button button-primary" href="#" target="_blank" rel="noopener">Contacter la boutique</a>
+    </section>
+  </main>
+
+  <footer><span>© <span id="year"></span> Louis Alima</span><span>Vitrine commerciale en ligne</span></footer>
+
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="adminClose" aria-label="Fermer">×</button>
+      <div id="authView">
+        <p class="eyebrow">ESPACE PRIVÉ</p><h2 id="adminTitle">Espace vendeur</h2>
+        <p class="muted">Connectez-vous avec le compte vendeur Supabase pour gérer les produits.</p>
+        <form id="loginForm" class="stack">
+          <label>Adresse e-mail<input id="loginEmail" type="email" autocomplete="username" required placeholder="vendeur@exemple.com"></label>
+          <label>Mot de passe<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Votre mot de passe"></label>
+          <button class="button button-primary" type="submit">Se connecter</button>
+          <p id="loginMessage" class="form-message" aria-live="polite"></p>
+        </form>
+      </div>
+      <div id="adminView" class="hidden">
+        <div class="admin-heading"><div><p class="eyebrow">GESTION DE LA BOUTIQUE</p><h2>Mes produits</h2></div><button id="logoutButton" class="button button-outline">Déconnexion</button></div>
+        <form id="productForm" class="stack">
+          <input id="productId" type="hidden">
+          <label>Nom du produit *<input id="productName" required maxlength="120" placeholder="Ex. Sac élégant"></label>
+          <label>Prix (FCFA) *<input id="productPrice" type="number" required min="0" step="1" placeholder="Ex. 15000"></label>
+          <label>Catégorie<input id="productCategory" maxlength="80" placeholder="Ex. Accessoires"></label>
+          <label>Photo du produit (URL)<input id="productImage" type="url" placeholder="https://…"></label>
+          <label>Description<textarea id="productDescription" rows="3" maxlength="1200" placeholder="Décrivez le produit…"></textarea></label>
+          <label class="checkbox-label"><input id="productAvailable" type="checkbox" checked> Produit disponible</label>
+          <div class="form-actions"><button class="button button-primary" type="submit" id="saveProduct">Enregistrer le produit</button><button class="button button-outline" type="button" id="cancelEdit">Effacer le formulaire</button></div>
+          <p id="productMessage" class="form-message" aria-live="polite"></p>
+        </form>
+        <h3 class="admin-list-title">Produits enregistrés</h3><div id="adminProductList" class="admin-product-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
